@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title Knowledgebase
+    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark 
+        a.navbar-brand(href='#') Techno Blog
+        |       
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        |       
+        #navbarsExampleDefault.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='/')  Home 
+            if user 
+              li
+                a.nav-link(href='/articles/add') Add Article
+          ul.nav.navbar-nav.navbar-right
+            if user 
+              li 
+                 a(href='/users/logout') logout
+            else
+              li
+                 a(href='/users/register') Register 
+                 br
+              |
+              li
+                 a(href='/users/login') Login                                                       
+.container
+     br
+     != messages('message', locals)
+     if errors
+       each error, i in errors
+         div(class="alert alert-danger") #{error.msg}
+     block content
+     br
+     hr
+     footer
+       p Copyright &copy; 2018
+script(src='/bower_components/jquery/dist/jquery.js')
+script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+script(src='/js/main.js') 
